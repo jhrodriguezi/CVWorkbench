@@ -5,6 +5,8 @@ PImage IMFish, IMRock, IMBackground, IMFishYellow, IMFishYB;
 float angle;
 FishShoal fishShoalBlue, fishShoalYellow, fishShoalYB;
 List<Obstacle> obstacles;
+Obstacle currentObstacle;
+boolean holdingObstacle = false;
 
 void setup() {
   fullScreen();
@@ -26,10 +28,7 @@ void setup() {
   
   IMBackground = loadImage("assets/background.jpg");
   IMBackground.resize(width, height);
-  
-  obstacles.add(new Obstacle(new PVector(500, 500), IMRock));
-  obstacles.add( new Obstacle(new PVector(1500, 500), IMRock));
-  
+
   fishShoalBlue = new FishShoal(IMFish);
   fishShoalYellow = new FishShoal(IMFishYellow);
   fishShoalYB = new FishShoal(IMFishYB);
@@ -59,5 +58,24 @@ void draw() {
   
   for(Obstacle o : obstacles){
     o.draw();
+  }
+  
+  if(holdingObstacle) {
+    currentObstacle.setPosition(new PVector(mouseX, mouseY));
+    currentObstacle.draw();
+  }
+}
+
+void keyPressed() {
+  if (key == '1') {
+    currentObstacle = new Obstacle(new PVector(mouseX, mouseY), IMRock);
+    holdingObstacle = true;
+  }
+}
+
+void mousePressed() {
+  if(holdingObstacle) {
+    obstacles.add(currentObstacle);
+    holdingObstacle = false;
   }
 }

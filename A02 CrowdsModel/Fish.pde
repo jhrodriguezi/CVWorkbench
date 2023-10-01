@@ -184,6 +184,7 @@ class Fish {
   
   void update() {
     velocity.add(acceleration);
+    velocity.x *= 1.03;
     velocity.limit(maxSpeed);
     
     position.add(velocity);

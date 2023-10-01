@@ -2,10 +2,10 @@ class Obstacle {
   PVector position;
   PImage content;
   float reactionDistance;
+  
   Obstacle(PVector p, PImage c) {
     c = c.copy();
-    float r = random(c.width);
-    System.out.println(r);
+    float r = random(50, c.width);
     c.resize(int(r), 0);
     this.position = p;
     this.content = c;
@@ -16,4 +16,7 @@ class Obstacle {
     image(content, position.x, position.y);
   }
   
+  void setPosition(PVector p) {
+    this.position = p;
+  }
 }
