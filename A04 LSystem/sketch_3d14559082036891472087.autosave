@@ -1,0 +1,264 @@
+class BaseLSystem {
+    constructor(axiom, rules) {
+        this.axiom = axiom;
+        this.rules = rules;
+    }
+
+    generate(iterations) {
+        let result = this.axiom;
+        for (let i = 0; i < iterations; i++) {
+            console.log(result)
+            result = this.iterate(result);
+        }
+        this.axiom = result;
+        return result;
+    }
+
+    iterate(result) {
+        var newResult = "";
+        for (let i = 0; i < result.length; i++) {
+            let char = result[i];
+            if (this.rules[char] !== undefined) {
+                newResult += this.rules[char];
+            } else {
+                newResult += char;
+            }
+        }
+        return newResult
+    }
+}
+
+// class FractalBinaryTree extends BaseLSystem {
+//     constructor() {
+//         super(
+//             '0',
+//             {
+//                 '1': '11',
+//                 '0': '1[0]0',
+//             }
+//         )
+//     }
+
+//     render() {
+//         // Set the initial position and angle
+//         translate(0, 200);
+//         box(50)
+//         // Set the initial length and angle
+//         let len = 0.1;
+//         let angle = PI / 4;
+//         // Loop through the symbols in the axiom
+//         for (let i = 0; i < this.axiom.length; i++) {
+//             let char = this.axiom[i];
+//             // Apply the drawing rules
+//             switch (char) {
+//                 case '0':
+//                     // Draw a line segment ending in a leaf
+//                     stroke(0, 255, 0);
+//                     line(0, 0, 0, -len);
+//                     ellipse(0, -len, 10, 10);
+//                     translate(0, -len);
+//                     break;
+//                 case '1':
+//                     // Draw a line segment
+//                     stroke(255);
+//                     cylinder(1, -len);
+//                     translate(0, -len);
+//                     break;
+//                 case '[':
+//                     // Push position and angle, turn left by angle
+//                     push();
+//                     rotateY(-angle);
+//                     rotateZ(angle * 0.5)
+//                     break;
+//                 case ']':
+//                     // Pop position and angle, turn right by angle
+//                     pop();
+//                     rotateY(angle);
+//                     rotateZ(-angle * 0.5)
+//                     break;
+//             }
+//         }
+//     }
+// }
+
+// class KochCurve extends BaseLSystem {
+//     constructor() {
+//         super(
+//             'F',
+//             {
+//                 'F': 'F+F-F-F+F'
+//             }
+//         )
+//     }
+
+//     render() {
+//         // Set the initial position and angle
+//         translate(-width * 0.2, height * 0.2);
+//         // Set the initial length and angle
+//         let len = 40;
+//         let angle = 2 * PI / 3;
+//         // Loop through the symbols in the axiom
+//         for (let i = 0; i < this.axiom.length; i++) {
+//             let char = this.axiom[i];
+//             // Apply the drawing rules
+//             switch (char) {
+//                 case 'F':
+//                     stroke(255);
+//                     box(len, 1, 10)
+//                     line(0, 0, len, 0);
+//                     translate(len, 0);
+//                     break;
+//                 case '+':
+//                     // Push position and angle, turn left by angle
+//                     push();
+//                     rotate(-angle);
+//                     break
+//                 case '-':
+//                     // Pop position and angle, turn right by angle
+//                     push();
+//                     rotate(angle);
+//                     break;
+//             }
+//         }
+//     }
+// }
+
+// class SierpinskiTriangle extends BaseLSystem {
+//     constructor() {
+//         super(
+//             'F-F-F',
+//             {
+//                 'F': 'F-G+F+G-F',
+//                 'G': 'GG'
+//             }
+//         )
+//     }
+
+//     render() {
+//         // Set the initial position and angle
+//         translate(-width / 3, -height / 3);
+//         // Set the initial length and angle
+//         let len = 30;
+//         let angle = 2 * PI / 3;
+//         // Loop through the symbols in the axiom
+//         for (let i = 0; i < this.axiom.length; i++) {
+//             let char = this.axiom[i];
+//             // Apply the drawing rules
+//             switch (char) {
+//                 case 'F':
+//                     stroke(255);
+//                     line(0, 0, len, 0);
+//                     translate(len, 0);
+//                     break;
+//                 case 'G':
+//                     stroke(255);
+//                     line(0, 0, len, 0);
+//                     translate(len, 0);
+//                     break;
+//                 case '+':
+//                     // Push position and angle, turn left by angle
+//                     push();
+//                     rotate(-angle);
+//                     break
+//                 case '-':
+//                     // Push position and angle, turn right by angle
+//                     push();
+//                     rotate(angle);
+//                     break;
+//             }
+//         }
+//     }
+// }
+
+class TreeA3D extends BaseLSystem {
+    constructor() {
+        super(
+            'F',
+            {
+                'F': 'F[+F]F[-F]F',
+            }
+        )
+    }
+
+    render() {
+        // Set the initial position and angle
+        translate(-width / 3, -height / 3);
+        // Set the initial length and angle
+        let len = 30;
+        let angle = 25.7;
+        // Loop through the symbols in the axiom
+        for (let i = 0; i < this.axiom.length; i++) {
+            let char = this.axiom[i];
+            // Apply the drawing rules
+            switch (char) {
+                case 'F':
+                    stroke(255);
+                    line(0, 0, len, 0);
+                    translate(len, 0);
+                    break;
+                case '+':
+                    // Push position and angle, turn left by angle
+                    push();
+                    rotate(-angle);
+                    break
+                case '-':
+                    // Push position and angle, turn right by angle
+                    push();
+                    rotate(angle);
+                    break;
+                case '[':
+                    // Push position and angle, turn right by angle
+                    push();
+                    break;
+                case ']':
+                    // Push position and angle, turn right by angle
+                    pop();
+                    break;
+            }
+        }
+    }
+}
+
+
+
+// const fractalBinaryTree = new FractalBinaryTree();
+// const kochCurve = new KochCurve();
+// const sierpinskiTriangle = new SierpinskiTriangle();
+const treeA3D = new TreeA3D();
+var radio;
+
+function setup() {
+    createCanvas(800, 520, WEBGL);
+    // fractalBinaryTree.generate(12);
+    // kochCurve.generate(5)
+    // sierpinskiTriangle.generate(4)
+    treeA3D.generate(4)
+    radio = createRadio();
+    radio.option('0', ' Fractal binary tree   ');
+    radio.option('1', ' Koch Curve   ');
+    radio.option('2', ' Sierpinski Triangle   ');
+    radio.position(40, height + 230);
+}
+
+function draw() {
+    background(0);
+    //rotateY(frameCount * 0.01);
+    //drawBasicLSystem()
+    treeA3D.render()
+    orbitControl();
+}
+
+// function drawBasicLSystem() {
+//     let val = radio.value();
+//     switch (val) {
+//         case '0':
+//             fractalBinaryTree.render();
+//             break;
+//         case '1':
+//             kochCurve.render()
+//             break;
+//         case '2':
+//             sierpinskiTriangle.render()
+//             break;
+//     }
+// }
