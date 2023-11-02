@@ -4,7 +4,6 @@ function setup() {
   createCanvas(640, 480, WEBGL);
   camera = createCamera();
   gl = this._renderer.GL;
-
   for (let i = -2; i < 2; i++) {
     for (let j = -2; j < 2; j++) {
       for (let k = -2; k < 2; k++) {
@@ -12,8 +11,6 @@ function setup() {
       }
     }
   }
-
-  // Set the depth test based on the initial value of enableZBuffer
   if (enableZBuffer) {
     gl.enable(gl.DEPTH_TEST);
   } else {
@@ -33,7 +30,6 @@ function draw() {
   });
   shapes.forEach(s => s.show());
 }
-
 function keyPressed() {
   if (key === ' ') {
     enableZBuffer = !enableZBuffer;
@@ -44,21 +40,17 @@ function keyPressed() {
     }
   }
 }
-
 function createPyramid(x, y, z) {
   let p1 = createVector(x + random(75), y + random(75), z);
   let p2 = createVector(x + 10 + random(75), y + 10 + random(75), z);
   let p3 = createVector(x + random(75), y + 10 + random(75), z);
   let p4 = createVector(x + random(75), y + random(75), z + 1 + random(75));
-
   let face1 = new PyramidFace(p1, p2, p3);
   let face2 = new PyramidFace(p1, p2, p4);
   let face3 = new PyramidFace(p1, p3, p4);
   let face4 = new PyramidFace(p2, p4, p3);
-
   shapes.push(face1, face2, face3, face4);
 }
-
 class PyramidFace {
   constructor(p1, p2, p3) {
     this.p1 = p1;
