@@ -7,7 +7,7 @@ void setup() {
   gouraudShader = loadShader("gouraudfrag.glsl", "gouraudvert.glsl");
   phongShader = loadShader("phongfrag.glsl", "phongvert.glsl");
 
-  lightDir = new PVector(0.5, -1, 0); // Dirección de la luz (ajusta según sea necesario)
+  lightDir = new PVector(0.5, -1, 0); 
 }
 
 void draw() {
